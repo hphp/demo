@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>
+why Hello world.
+</h1>
+<div>
+<video width="320" height="240" controls="controls" autoplay="autoplay">
+  <source src="C:\Users\happyhan\Desktop\Life\A.mp4" type="video/mp4" />
+  <!--
+  <source src="C:\Users\happyhan\Desktop\Life\A.webm" type="video/webm" />
+  -->
+  <source src="movie.ogg" type="video/ogg" />
+Your browser does not support the video tag.
+
+</video>
+<canvas id="myCanvas" width="202" height="285" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+</div>
+
+<!--<div hidden="true">-->
+<div>
+<img id="motion1" src="move/a.jpg" alt="The Scream" width="220" height="277" />
+<img id="motion2" src="move/b.jpg" alt="The Scream" width="220" height="277" />
+<img id="motion3" src="move/c.jpg" alt="The Scream" width="220" height="277" />
+<img id="motion4" src="move/d.jpg" alt="The Scream" width="220" height="277" />
+<img id="motion5" src="move/e.jpg" alt="The Scream" width="220" height="277" />
+<img id="motion6" src="move/f.jpg" alt="The Scream" width="220" height="277" />
+</div>
+<script>
+
+
+
+var c=document.getElementById("myCanvas");
+var ctx=c.getContext("2d");
+ctx.beginPath();
+ctx.arc(95,50,40,0,2*Math.PI);
+ctx.stroke();
+setTimeout(function(){
+ctx.clearRect(0, 0, c.width, c.height);
+ctx.beginPath();
+ctx.moveTo(0,0);
+ctx.lineTo(300,150);
+ctx.stroke();
+},100);
+var imgid=0;
+var timeid=1;
+
+function change(){
+imgid=imgid%6+1;
+ctx.clearRect(0, 0, c.width, c.height);
+var imgname="motion"+imgid;
+var img=document.getElementById(imgname);
+ctx.drawImage(img,0,0);
+imgid++;
+}
+
+function action(){
+while(timeid<42){
+setTimeout(change,200*timeid);
+timeid++;
+}
+}
+
+action();
+
+
+
+</script> 
+</body>
+</html>

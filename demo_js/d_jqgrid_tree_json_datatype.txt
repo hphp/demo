@@ -1,0 +1,73 @@
+{
+        total:1,
+        page:1,
+        records:6,
+        rows:[
+            {
+                        id: 1,
+                cell:[
+                    'Tabelle',
+                    '1a2',
+                    0,
+                    null,
+                    false,
+                    false
+                ]
+            },
+            {
+                        id: 2,
+                cell:[
+                    'Gestione Strutture',
+                    '2a2',
+                    0,
+                    1,
+                    true,
+                    false
+                ]
+            },
+            {
+                        id: 3,
+                cell:[
+                    'Gestione Centri',
+                    '3a2',
+                    0,
+                    1,
+                    true,
+                    false
+                ]
+            },
+            {
+                        id: 4,
+                cell:[
+                    'Cedolino online',
+                    '1b2',
+                    0,
+                    null,
+                    false,
+                    false
+                ]
+            },
+            {
+                        id: 5,
+                cell:[
+                    'Visibilita',
+                    '2b2',
+                    0,
+                    4,
+                    true,
+                    false
+                ]
+            },
+            {
+                        id: 6,
+                cell:[
+                    'Cambio mese',
+                    '3b2',
+                    0,
+                    4,
+                    true,
+                    false
+                ]
+            }
+        ]
+} 
