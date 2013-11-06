@@ -2,6 +2,27 @@
 
 import numpy
 
+def to_tuple():
+    a = [[14,3,3,4],[2,2,3,4],[3,23,3,3],[4,3,3,3]]
+    b = numpy.asarray(a)
+    print b,type(b),b.shape,b.shape[0],b.shape[1]
+    c = numpy.array(b)
+    print c,type(c)
+
+
+def connect():
+    a = [[14,3,3,4],[2,2,3,4],[3,23,3,3],[4,3,3,3]]
+    b = numpy.asarray(a)
+    print b,type(b),b.shape,b.shape[0],b.shape[1]
+    c = numpy.asarray(a)
+    d = (a,b) 
+    print d,type(d),d.shape,d.shape[0],d.shape[1]
+
+def shape():
+    a = [[14,3,3,4],[2,2,3,4],[3,23,3,3],[4,3,3,3]]
+    b = numpy.asarray(a)
+    print b,type(b),b.shape,b.shape[0],b.shape[1]
+
 def reshape():
     a = [[14,3,3,4],[2,2,3,4],[3,23,3,3],[4,3,3,3]]
     b = numpy.asarray(a)
@@ -26,4 +47,7 @@ def attach_ndarray():
     print b
 
 #attach_ndarray()
-reshape()
+#reshape()
+#shape()
+#connect()
+to_tuple()
