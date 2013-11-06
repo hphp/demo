@@ -70,7 +70,7 @@ output = T.nnet.sigmoid(conv_out + b.dimshuffle('x', 0, 'x', 'x'))
 f = theano.function([input], output)
 
 # open random image of dimensions 639x516
-img = Image.open(open("cat.5123.jpg"))
+img = Image.open(open("dog.5123.jpg"))
 #img = Image.open(open("/home/hphp/Documents/code/DeepLearning/DeepLearningTutorials/doc/images/3wolfmoon.jpg"))
 #img = img.resize((200,200),Image.ANTIALIAS)
 #img.show()
@@ -91,8 +91,8 @@ pylab.subplot(1, 3, 2); pylab.axis('off'); pylab.imshow(filtered_img[0, 0, :, :]
 pylab.subplot(1, 3, 3); pylab.axis('off'); pylab.imshow(filtered_img[0, 1, :, :])
 
 # filter_img.shape = (1,2,img_h,img_w)
-#print type(filtered_img),filtered_img.shape
-#print type(filtered_img[0,0,:,:]),filtered_img[0,0,:,:].shape
+print type(filtered_img),filtered_img.shape
+print type(filtered_img[0,0,:,:]),filtered_img[0,0,:,:].shape
 #print type(img),img.shape
 pylab.show()
 
