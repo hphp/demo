@@ -5,6 +5,14 @@
     2013-11-04
     wanna see how image will be after outline-filtered.
     the results goes well.
+
+    modified by hp_carrot
+    2013-11-08
+    see detail of convolution calculation
+    conv2d(input,W)
+    input.shape = [mini-batch size,feature maps number, img-h ,img-w]
+    W.shape = [ feature maps number of m layer , fmn of m-1 layer , filter h,
+    filter -w ]
 '''
 
 import numpy
@@ -80,6 +88,17 @@ img = numpy.asarray(img, dtype='float64') / 256.
 
 # put image in 4D tensor of shape (1, 3, height, width)
 img_ = img.swapaxes(0, 2).swapaxes(1, 2).reshape(1, 3, img_h, img_w)
+print "type of img : ", type(img) , img.shape
+print "type of swapaxes(0,2):" ,type(img.swapaxes(0,2)) ,img.swapaxes(0,2).shape
+print "type of swapaxes(0,2).swapaxes(1,2):" ,type(img.swapaxes(0,2).swapaxes(1,2)) ,img.swapaxes(0,2).swapaxes(1,2).shape
+print "type of swapaxes(0,2).swapaxes(1,2).reshape(1,3,img_h,img_w):" ,type(img.swapaxes(0,2).swapaxes(1,2).reshape(1,3,img_h,img_w)) ,img.swapaxes(0,2).swapaxes(1,2).reshape(1,3,img_h,img_w).shape
+'''
+type of img :  <type 'numpy.ndarray'> (285, 304, 3)
+type of swapaxes(0,2): <type 'numpy.ndarray'> (3, 304, 285)
+type of swapaxes(0,2).swapaxes(1,2): <type 'numpy.ndarray'> (3, 285, 304)
+type of swapaxes(0,2).swapaxes(1,2).reshape(1,3,img_h,img_w): <type
+'numpy.ndarray'> (1, 3, 285, 304)
+'''
 filtered_img = f(img_)
 
 # plot original image and first and second components of output
@@ -95,4 +114,3 @@ print type(filtered_img),filtered_img.shape
 print type(filtered_img[0,0,:,:]),filtered_img[0,0,:,:].shape
 #print type(img),img.shape
 pylab.show()
-
