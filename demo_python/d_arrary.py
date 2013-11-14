@@ -23,6 +23,10 @@ def new_list():
         print list[i]
 #new_list()
 
+def new_list_with_len():
+    list = [0]*4
+    print list,len(list)
+
 def del_list():
     list = range(10)
     print list
@@ -31,4 +35,5 @@ def del_list():
 #del_list()
 
 #part_list()
-l_range()
+#l_range()
+new_list_with_len()
