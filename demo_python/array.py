@@ -1,5 +1,11 @@
 #!/usr/local/bin/python
 
+def concat_list():
+    a = [2,4]
+    b = [5,6,7]
+    c = a + b
+    print c,type(c),len(c)
+
 def new_list():
     list=[2,45]
     print list[0]
@@ -17,4 +23,5 @@ def del_list():
     print list
     del list[2]
     print list
-del_list()
+#del_list()
+concat_list()

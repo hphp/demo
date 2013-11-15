@@ -6,7 +6,7 @@ def to_tuple():
     a = [[14,3,3,4],[2,2,3,4],[3,23,3,3],[4,3,3,3]]
     b = numpy.asarray(a)
     print b,type(b),b.shape,b.shape[0],b.shape[1]
-    c = numpy.array(b)
+    c = numpy.array(b) # returns ndarray
     print c,type(c)
 
 
