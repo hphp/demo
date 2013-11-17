@@ -118,7 +118,7 @@ void drawSquares( Mat& image, const vector<vector<Point> >& squares )
     {
         const Point* p = &squares[i][0];
         int n = (int)squares[i].size();
-        polylines(image, &p, &n, 1, true, Scalar(0,255,0), 3, CV_AA);
+        polylines(image, &p, &n, 1, true, Scalar(0,255,255), 3, CV_AA);
     }
 
     imshow(wndname, image);
@@ -133,6 +133,8 @@ int main(int argc, char** argv)
         "/home/hphp/Pictures/dr.jpg"
         ,
         "/home/hphp/Pictures/dr_2.jpg"
+        ,
+        "/home/hphp/Pictures/dr_3.jpg"
         ,
         0
     };

@@ -14,6 +14,14 @@ def input_type():
     y = [1, 1, 0]
     print type(X),type(y),len(X),len(y) 
 
+def output_type():
+    X = [[0, 0], [1, 1] , [-1,-1]]
+    y = [1, 1, 0]
+    clf = svm.SVC()
+    clf.fit(X, y) 
+    pred_y = clf.predict([2,2])
+    print type(pred_y)
+
 def if_could_get_trained_continuously():
     X = [[0, 0], [1, 1] , [-1,-1]]
     y = [1, 1, 0]
@@ -33,5 +41,6 @@ def if_could_get_trained_continuously():
     clf.fit(X, y) 
     print clf.predict([2,2])
 
-if_could_get_trained_continiously()    
+#if_could_get_trained_continiously()    
 #input_type()
+#output_type() # numpy.ndarray

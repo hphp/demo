@@ -2,6 +2,15 @@
 
 import numpy
 
+def get_arg_index():
+    b = [5,4,3,2,1,0,1,2,3,4,5,6]
+    a = numpy.array(b)
+    arg_list = numpy.argwhere(a == 2) 
+    print "type," , type(arg_list)
+    print "list,", arg_list # [[3] \n [7]]
+    print "len,",len(arg_list)
+    print "shape,", arg_list.shape
+
 def to_tuple():
     a = [[14,3,3,4],[2,2,3,4],[3,23,3,3],[4,3,3,3]]
     b = numpy.asarray(a)
@@ -50,4 +59,5 @@ def attach_ndarray():
 #reshape()
 #shape()
 #connect()
-to_tuple()
+#to_tuple()
+get_arg_index()
