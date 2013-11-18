@@ -78,7 +78,7 @@ output = T.nnet.sigmoid(conv_out + b.dimshuffle('x', 0, 'x', 'x'))
 f = theano.function([input], output)
 
 # open random image of dimensions 639x516
-img = Image.open(open("dog.5123.jpg"))
+img = Image.open(open("cat.5123.jpg"))
 #img = Image.open(open("/home/hphp/Documents/code/DeepLearning/DeepLearningTutorials/doc/images/3wolfmoon.jpg"))
 #img = img.resize((200,200),Image.ANTIALIAS)
 #img.show()
