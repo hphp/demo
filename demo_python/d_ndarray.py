@@ -2,6 +2,24 @@
 
 import numpy
 
+def ndarray_init():
+    a = numpy.arange(15) # ok
+    print type(a),a.shape # <type 'numpy.ndarray'> (15,)
+    a = numpy.array(15) #
+    print type(a),a.shape # ndarray, ()
+    a = numpy.zeros(15, dtype='float32')
+    print type(a),a.shape # ndarray, (15,)
+    a = numpy.zeros(15)
+    print type(a),a.shape # ndarray, (15,)
+
+def ndarray_calculation():
+    b = [5,4,3,2,1,0,1,2,3,4,5,6]
+    a = numpy.array(b)
+    c = numpy.asarray(a,dtype='float32') / 2
+    print c
+    c = a/2 
+    print c
+
 def get_arg_index():
     b = [5,4,3,2,1,0,1,2,3,4,5,6]
     a = numpy.array(b)
@@ -60,4 +78,6 @@ def attach_ndarray():
 #shape()
 #connect()
 #to_tuple()
-get_arg_index()
+#get_arg_index()
+#ndarray_calculation()
+ndarray_init()
