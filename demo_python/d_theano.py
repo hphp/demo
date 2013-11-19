@@ -1,6 +1,18 @@
 from theano import *
 import theano.tensor as T
 
+index = T.lscalar()
+print type(index),index
+v = T.ivector('v')
+dot_index_v = T.dot(index, v)
+test_results = theano.function(inputs=[index, v], outputs=dot_index_v)
+
+
+def global_function():
+    global index
+    i = test_results(2,[1,3])
+    print i
+
 def basic():
     W = T.dmatrix('W')
     v = T.dvector('v')
@@ -24,3 +36,4 @@ def basic():
     f = function([v, x], VJ) # error :theano.compile.function_module.UnusedInputError: , because of W.
     print f([0,1],[1,1])
 
+global_function()

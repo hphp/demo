@@ -20,5 +20,6 @@ def test_a():
     b = 4
 
 test_class()
+print c.m
 #test_a()
 #print a, b
