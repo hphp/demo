@@ -1,6 +1,10 @@
 
 import random
 
+def over_range():
+    a = random.randrange(0,-1)
+    print a
+
 def generate_random_list():
     feature = []
     for i in range(2500):
@@ -17,4 +21,5 @@ def random_list():
     print nl
 
 #random_list()
-generate_random_list()
+#generate_random_list()
+over_range()

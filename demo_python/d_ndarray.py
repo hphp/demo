@@ -9,8 +9,10 @@ def sub_array():
     print h_cutted, h_cutted.shape
     h_cutted = numpy.hsplit(v_cutted, numpy.array([2]))[0]
     h_cutted_2 = numpy.hsplit(v_cutted, numpy.array([2,6]))[1]
-    print h_cutted, h_cutted.shape
-    print h_cutted_2, h_cutted_2.shape
+    h_cutted_3 = numpy.hsplit(v_cutted, numpy.array([2,3+2]))[1]
+    print h_cutted, h_cutted.shape # (3, 2)
+    print h_cutted_2, h_cutted_2.shape # (3, 4)
+    print h_cutted_3, h_cutted_3.shape # (3, 3)
 
 def ndarray_init():
     a = numpy.arange(15) # ok
