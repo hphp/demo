@@ -3,6 +3,7 @@ import cPickle
 import theano
 import theano.tensor as T
 import numpy
+import numpy as np
 
 class d_pickle_TEMPLATE():
     def __init__(self,v=0,m=2,n=150):
@@ -68,6 +69,18 @@ def dump_tensor_obj():
     print f_d([1,1])
     print f_d([1,1])
 
+def numpy_save():
+    data = np.random.rand(50000000)
+    f = open('foo.pck', 'wb')
+    cPickle.dump([1,2,3], f, protocol=2)
+    np.save(f, data)
+    f.close()
+
+    f= open('foo.pck', 'rb')
+    v = cPickle.load(f)
+    data = np.load(f)
+    print data.shape, data
+
 def basic():
     list_l = [0,2,3,1,4,9]
     file_t = open('tmp.file','w')
@@ -110,4 +123,5 @@ def dump_obj():
 
 #diff_type_obj()
 #dump_obj()
-dump_tensor_obj()
+#dump_tensor_obj()
+numpy_save()
