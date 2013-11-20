@@ -2,6 +2,12 @@
 
 import numpy
 
+def sub_array():
+    ndarr = numpy.arange(24).reshape(4,6) # shape(4,6)
+    v_cutted = ndarr[0:3] # shape:(3,6)
+    h_cutted = numpy.hsplit(v_cutted, 2)[0]
+    print h_cutted, h_cutted.shape
+
 def ndarray_init():
     a = numpy.arange(15) # ok
     print type(a),a.shape # <type 'numpy.ndarray'> (15,)
@@ -78,8 +84,9 @@ def attach_ndarray():
 #attach_ndarray()
 #reshape()
 #shape()
-connect()
+#connect()
 #to_tuple()
 #get_arg_index()
 #ndarray_calculation()
 #ndarray_init()
+sub_array()
