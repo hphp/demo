@@ -1,5 +1,9 @@
 #!/usr/bin/python
 
+def last_ele():
+    l = [1,2,3,4,5]
+    print l[-1]
+
 def l_range():
     for i in range(1,3):
         print i
@@ -36,4 +40,5 @@ def del_list():
 
 #part_list()
 #l_range()
-new_list_with_len()
+#new_list_with_len()
+last_ele()

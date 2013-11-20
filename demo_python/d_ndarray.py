@@ -42,7 +42,9 @@ def connect():
     b = numpy.asarray(a)
     print b,type(b),b.shape,b.shape[0],b.shape[1]
     c = numpy.asarray(a)
-    d = (a,b) 
+    d = (a,b) # not a way to connect two arrays.
+    print d,type(d) # tuple
+    d = numpy.concatenate((b,c)) # good way to connect two ndarray
     print d,type(d),d.shape,d.shape[0],d.shape[1]
 
 def shape():
@@ -76,8 +78,8 @@ def attach_ndarray():
 #attach_ndarray()
 #reshape()
 #shape()
-#connect()
+connect()
 #to_tuple()
 #get_arg_index()
 #ndarray_calculation()
-ndarray_init()
+#ndarray_init()
