@@ -1,0 +1,6 @@
+Linux 2.6.16.60-0.21-TENCENT-121023 (Tencent) 	11/28/12
+
+Device:    rrqm/s wrqm/s   r/s   w/s  rsec/s  wsec/s    rkB/s    wkB/s avgrq-sz avgqu-sz   await  svctm  %util
+sda          0.00   1.04  0.03  1.03    0.59   18.14     0.30     9.07    17.79     0.01    8.80   6.24   0.66
+sdb          0.00   0.00  0.00  0.00    0.03    0.00     0.01     0.00     8.38     0.00   86.38  43.31   0.01
+
