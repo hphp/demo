@@ -1,0 +1,10 @@
+--11:13:16--  http://172.27.33.246/cgi-bin/coss/getBwInfo_new?radio=4&begindate=2012-07-20&enddate=2012-07-20&type=2
+           => `wget_oc10_info_by_coss_2012-07-20'
+Connecting to 172.27.33.246:80... 已连接。
+已发出 HTTP 请求，正在等待回应... 200 OK
+长度：未指定 [text/xml]
+
+    0K .......... .....                                         11.07 MB/s
+
+11:13:16 (11.07 MB/s) - `wget_oc10_info_by_coss_2012-07-20' saved [15768]
+
