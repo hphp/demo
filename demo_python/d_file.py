@@ -1,6 +1,10 @@
 #!/usr/bin/python
 import os
 
+def check_isfile():
+    filename = "../demo_python"
+    print os.path.isdir(filename)
+
 def basic():
     f = open('test','w')
     f.write('xx')
@@ -18,4 +22,5 @@ def append():
     f.close()
 
 
-append()
+#append()
+check_isfile()
