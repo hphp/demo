@@ -4,6 +4,13 @@ def last_ele():
     l = [1,2,3,4,5]
     print l[-1]
 
+def range_list():
+    l = range(100)
+    print l[0], l[-1]
+    print l[0:2]
+    print l[3:2]
+    print l[3:3+2]
+
 def l_range():
     for i in range(1,3):
         print i
@@ -41,4 +48,5 @@ def del_list():
 #part_list()
 #l_range()
 #new_list_with_len()
-last_ele()
+#last_ele()
+range_list()
