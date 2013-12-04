@@ -1,5 +1,11 @@
 #!/usr/bin/python
 
+def l_clear():
+    l = range(10)
+    print l
+    l = []
+    print l
+
 def last_ele():
     l = [1,2,3,4,5]
     print l[-1]
@@ -49,4 +55,5 @@ def del_list():
 #l_range()
 #new_list_with_len()
 #last_ele()
-range_list()
+#range_list()
+l_clear()
