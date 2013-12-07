@@ -8,3 +8,7 @@ def change_global():
     print a
     a = 30
     print a
+
+def show_global():
+    global a
+    print a
