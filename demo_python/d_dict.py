@@ -19,5 +19,8 @@ def subdict():
     dic[1] = {'y':2} #,{'x',2}}
     print dic
 
+    dic = {'x':1, 'y':2, 'z':3}
+    print dic['x']
+
 #iter()
 subdict()
