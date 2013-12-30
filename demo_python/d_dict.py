@@ -13,4 +13,11 @@ def iter():
     for i in range(3):
         print dic[i]
 
-iter()
+def subdict():
+    dic = {}
+    dic[0] = {'x':1} #,{'z':3}}
+    dic[1] = {'y':2} #,{'x',2}}
+    print dic
+
+#iter()
+subdict()
