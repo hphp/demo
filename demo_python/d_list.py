@@ -1,5 +1,13 @@
 #!/usr/bin/python
 
+def dynamic_list():
+    l = []
+    for i in range(10):
+        l += [[1]]
+        #l[i].append(1)
+
+    print l
+
 def l_clear():
     l = range(10)
     print l
@@ -56,4 +64,5 @@ def del_list():
 #new_list_with_len()
 #last_ele()
 #range_list()
-l_clear()
+#l_clear()
+dynamic_list()
