@@ -20,6 +20,9 @@ def random_list():
     nl = random.sample(ll,10)
     print nl
 
+def random_basic():
+    print random.randrange(1000)
 #random_list()
 #generate_random_list()
-over_range()
+#over_range()
+random_basic()
