@@ -19,6 +19,17 @@ def read_file():
             break
         print line
     f.close()
+    print 'reopen'
+    f = open(content,'r+')
+    while True:
+        line = f.readline()
+        if not line:
+            break
+        first_part = line.split("\n")[0]
+        stuff, price = first_part.split(",")
+        print stuff
+        print price
+    f.close()
 
 def check_isfile():
     filename = "../demo_python"
