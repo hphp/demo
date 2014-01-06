@@ -2,7 +2,7 @@
 import os
 
 def read_file():
-    content = "ff"
+    content = "d_file.in"
     f = open(content,'r+')
     print f
     print
