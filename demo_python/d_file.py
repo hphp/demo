@@ -1,6 +1,15 @@
 #!/usr/bin/python
 import os
 
+def rename():
+    os.system("touch temp")
+    os.rename("temp", "temp2")
+    f = open("temp2", "r")
+    f.close()
+    print "temp2 exists"
+    f = open("temp", "r")
+    f.close()
+
 def read_file():
     content = "d_file.in"
     f = open(content,'r+')
@@ -54,4 +63,5 @@ def append():
 
 #append()
 #check_isfile()
-read_file()
+#read_file()
+rename()
