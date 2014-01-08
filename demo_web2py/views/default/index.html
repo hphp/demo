@@ -1,0 +1,8 @@
+{{def itemlink(name,url):}}<li>{{=A(name,_href=url)}}</li>{{return}}
+
+<ul>
+    {{for t,url in url_list:}}
+        {{=t}}
+        {{itemlink(t,url)}}
+    {{pass}}
+</ul>
