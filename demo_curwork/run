@@ -1,0 +1,24 @@
+#!/bin/bash -e
+
+#rm -rf $1
+#mkdir $1
+#python ../ocropus-sauvola $1"."$2 -o $1 #--noskew
+##ocropus-sauvola $1"."$2 -o $1
+#python ../ocropus-gpageseg $1'/????.bin.png' --minscale 10 --maxlines 500
+#ocropus-rpred $1'/????/??????.bin.png'
+#ocropus-hocr $1'/????.bin.png' -o $1".html" 
+#ocropus-gtedit html $1/????/??????.bin.png -o $1'-correction.html'
+#ocropus_showpage $1'/????.pseg.png' -o $1'/0001.showseg'
+#python ../Gotex_showpage $1/????.pseg.png -o $1'/0001.cmp.png'
+#python ../Gotex-understand $1/????.pseg.png -plt Gotex/EngBill7/0001.pairs.png
+
+echo "Binary: ocropus-sauvola" >> $1'/info.txt'
+echo "" >> $1'/info.txt'
+echo "SegToTextLines: ocropus-gpageseg" >> $1'/info.txt'
+echo "" >> $1'/info.txt'
+echo "Regconition: coocropus-rpred. LSTM-RNN" >> $1'/info.txt'
+#ocropus-visualize-results temp
+
+#echo "to see recognition results, type: firefox temp.html"
+#echo "to see correction page, type: firefox temp-correction.html"
+#echo "to see details on the recognition process, type: firefox temp/index.html"
