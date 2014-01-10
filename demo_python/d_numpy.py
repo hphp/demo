@@ -41,6 +41,7 @@ def f_where():
     y = numpy.arange(10,25)
     z = numpy.arange(10,12)
     m = numpy.arange(10,19)
+    fx = numpy.arange(10.,19.).reshape(3,3)
     print x
     print numpy.where( x > 15 )
     print numpy.where( x > 13 )
@@ -48,6 +49,8 @@ def f_where():
     #print numpy.where( x>15, y, -1 ) # different size --> shape mismatch
     #print numpy.where( x>15, z, -1 ) # different size
     #print numpy.where( x>15, m, -1 ) # shape mismatch
+    print "float vs integer" , numpy.where( fx > 12. , x, -1)
+    print "float vs integer" , numpy.where( fx, x, -1)
 
     x = numpy.arange(10,22).reshape(3,4)
     print x
@@ -80,7 +83,7 @@ def basic():
 
 #basic()
 #uniform()
-#f_where()
 #f_arange()
 #f_amax()
-f_dtype()
+#f_dtype()
+f_where()
