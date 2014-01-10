@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import matplotlib.pyplot as plt
 
+def plot_arr():
+
 def plot_text(rt=False, plenty=1):
     fig = plt.figure()
     #fig.suptitle('bold figure suptitle', fontsize=14, fontweight='bold')
