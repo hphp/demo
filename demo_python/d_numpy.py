@@ -2,6 +2,18 @@
 import numpy
 import random
 
+def f_ones():
+    l = numpy.ones(2)
+    print l # [ 1. 1. ]
+    m = numpy.ones(l)
+    print m # [ [ 1. ] ]
+    l = numpy.ones((3,4))
+    print l
+    m = numpy.ones(l.shape)
+    print m
+    m = numpy.ones(l)
+    print m
+
 def f_dtype():
     l = numpy.arange(10)
     print l.dtype
@@ -86,4 +98,5 @@ def basic():
 #f_arange()
 #f_amax()
 #f_dtype()
-f_where()
+#f_where()
+f_ones()
