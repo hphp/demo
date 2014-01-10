@@ -2,6 +2,29 @@
 from pylab import *
 import cv2
 
+def basic():
+    import pylab as pl
+    import numpy as np
+    t = np.linspace(0, 10, 20)
+    s = sin(t)
+    pl.plot(t, s)
+    pl.show()
+    print 'hello'
+    pl.clf()
+    t = np.linspace(0, 10, 20)
+    s = (2*t)
+    pl.figure()
+    pl.plot(t, s)
+    pl.show()
+
+def subplot():
+    import pylab as pl
+    import numpy as np
+    f = pl.figure()
+    X = np.linspace(-np.pi, np.pi, 256, endpoint=True)
+    #f.add_subplot(X, np.cos(X))
+    #pl.show()
+
 def ndarr():
     import pylab as pl
     import numpy as np
@@ -46,4 +69,6 @@ def write_text_in_figure():
 #write_text_in_plot()
 #img_ratio()
 #write_text_in_figure()
-ndarr()
+#ndarr()
+#subplot()
+basic()
