@@ -2,6 +2,10 @@
 import numpy
 import random
 
+def f_dtype():
+    l = numpy.arange(10)
+    print l.dtype
+
 def f_amax():
     l = numpy.arange(10)
     print numpy.amax(l)
@@ -43,7 +47,7 @@ def f_where():
     print numpy.where( x>15, x, -1 )
     #print numpy.where( x>15, y, -1 ) # different size --> shape mismatch
     #print numpy.where( x>15, z, -1 ) # different size
-    print numpy.where( x>15, m, -1 ) # shape mismatch
+    #print numpy.where( x>15, m, -1 ) # shape mismatch
 
     x = numpy.arange(10,22).reshape(3,4)
     print x
@@ -76,6 +80,7 @@ def basic():
 
 #basic()
 #uniform()
-f_where()
+#f_where()
 #f_arange()
 #f_amax()
+f_dtype()
