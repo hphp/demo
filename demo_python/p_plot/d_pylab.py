@@ -2,6 +2,19 @@
 from pylab import *
 import cv2
 
+def ndarr():
+    import pylab as pl
+    import numpy as np
+
+    X = np.linspace(-np.pi, np.pi, 256, endpoint=True)
+    print X.shape, X
+    C, S = np.cos(X), np.sin(X)
+
+    pl.plot(X, C)
+    pl.plot(X, S)
+
+    pl.show()
+
 def show_img_in_plot():
     img = cv2.imread("../cp.jpg")
     imshow(img)
@@ -32,4 +45,5 @@ def write_text_in_figure():
 #show_img_in_plot()
 #write_text_in_plot()
 #img_ratio()
-write_text_in_figure()
+#write_text_in_figure()
+ndarr()
