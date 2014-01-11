@@ -1,0 +1,185 @@
+#!/usr/bin/python
+
+# FIXME use argparse
+
+import __builtin__ as python
+import random as pyrandom
+import sys,os,re,optparse,shutil,glob,argparse,codecs
+import matplotlib
+if "DISPLAY" not in os.environ: matplotlib.use("AGG")
+else: matplotlib.use("GTK")
+import signal
+signal.signal(signal.SIGINT,lambda *args:sys.exit(1))
+from matplotlib import patches
+from pylab import *
+from scipy.stats.stats import trim1
+
+from scipy.ndimage import measurements
+from scipy.misc import imsave
+from PIL import Image
+import ocrolib
+from ocrolib import hocr
+
+import text_t
+
+parser = argparse.ArgumentParser("""
+Construct matched pairs of what we got.
+Gotex-understand fileroute/file.pseg.png
+""")
+parser.add_argument("-plt","--plotroute",default="plot.pairs.png",help="plot output file")
+parser.add_argument('files',nargs='+')
+args = parser.parse_args()
+args.files = ocrolib.glob_all(args.files)
+
+last_coords = None
+
+def KMean(info_list, max_groupn, key_name):
+    info_list = sorted(info_list, key = lambda ele:ele[key_name])
+    s_lista = info_list
+    diff = s_lista[-1][key_name] - s_lista[0][key_name]
+    max_threshold = diff / max_groupn
+    last = -10000
+    group = []
+    groupcnt = -1
+    for ele in s_lista:
+        if ele[key_name] - last > max_threshold:
+            groupcnt += 1
+            group += [[ele]]
+        else :
+            group[groupcnt].append(ele)
+        last = ele[key_name]
+
+    return group
+
+def match_group(a_group, b_group):
+    final_info = []
+    if len(a_group) == len(b_group):
+        for index in range(len(a_group)):
+            stuff = a_group[index] 
+            perchase = b_group[index]
+            dic = {'stuff':stuff, 'perchase':perchase}
+            final_info += [dic]
+    else:
+        for index in range(len(a_group)):
+            stuff = a_group[index]
+            min_dis = 10000
+            best_perchase = None
+            for i in range(len(b_group)):
+                perchase = b_group[i]
+                cur_dis = abs(perchase['y0'] - stuff['y0'])
+                if cur_dis < min_dis:
+                    min_dis = cur_dis
+                    best_perchase = perchase
+            if best_perchase != None:
+                dic = {'stuff':stuff, 'perchase':best_perchase}
+                final_info += [dic]
+        for i in range(len(b_group)):
+            perchase = b_group[i]
+            min_dis = 10000
+            best_stuff = None
+            for index in range(len(a_group)):
+                stuff = a_group[index]
+                cur_dis = abs(perchase['y0'] - stuff['y0'])
+                if cur_dis < min_dis:
+                    min_dis = cur_dis
+                    best_stuff = stuff
+            dic = {'stuff':best_stuff, 'perchase':perchase}
+            if (best_stuff != None) & (dic not in final_info):
+                final_info += [dic]
+            
+    return final_info 
+
+info_list = []
+
+for arg in args.files:
+    base,_ = ocrolib.allsplitext(arg)
+    # to proceed, we need a pseg file and a
+    # subdirectory containing text lines
+
+    if not os.path.exists(base+".pseg.png"):
+        print ("%s: no such file"%(base+".pseg.png",))
+        continue
+
+    if not os.path.isdir(base):
+        print ("%s: no such directory"%base)
+        continue
+
+    # iterate through the text lines in reading order, based
+    # on the page segmentation file
+
+    pseg = ocrolib.read_page_segmentation(base+".pseg.png")
+    regions = ocrolib.RegionExtractor()
+    regions.setPageLines(pseg)
+    for i in range(1,regions.length()):
+
+        # keep track of the bounding box information for each line
+        # and insert paragraph breaks as needed
+
+        id = regions.id(i)
+        y0,x0,y1,x1 = regions.bboxMath(i)
+        if last_coords is not None:
+            lx0,ly0 = last_coords
+            dx,dy = x0-lx0,y1-ly0
+            par = 0
+        last_coords = (x0,y0)
+
+        # get the text for the line itself
+
+        lbase = "%s/%06x"%(base,id)
+
+        if not os.path.exists(lbase+".txt"):
+            print ("note: line %s produced no output (it may not have contained text)"%(lbase+".bin.png"))
+            continue
+
+        text = ocrolib.read_text(lbase+".txt")
+
+        text = re.sub(r'\&','\&amp;',text)
+        text = re.sub(r'\<','\&lt;',text)
+        text_type = text_t.text_type(text)
+        dic = {'id':id, 'x0':x0, 'x1':x1, 'y0':y0, 'y1':y1, 'text':text, 'text_type':text_type}
+        info_list += [dic]
+
+key_name = 'x0'
+group = KMean(info_list, 5, key_name)
+
+#print 'here comes the pairs\n'
+stuff_g, perchase_g = text_t.extract_two_column(group)
+if perchase_g == None:
+    perchase_g = group[-1]
+if stuff_g == None:
+    stuff_g = group[0]
+
+'''
+if stuff_g is None:
+    stuff_g = []
+    id = -1
+    x0,x1,y0,y1 = 0
+    text = "Nothing"
+    text_type = text_t.text_type(text)
+    dic = {'id':id, 'x0':x0, 'x1':x1, 'y0':y0, 'y1':y1, 'text':text, 'text_type':text_type}
+    stuff_g += [dic]
+'''
+final_info = match_group(stuff_g, perchase_g)
+final_info = sorted(final_info, key = lambda ele:ele['stuff']['y0'], reverse=True)
+for item in final_info:
+    print item['stuff']['text'], ' ----------- ',item['perchase']['text']
+
+hfigsize = (9, 12)
+dpi=100
+h = hfigsize[0]*dpi
+fig = plt.figure(figsize=hfigsize, dpi=dpi)
+ax = fig.add_subplot(111)
+i = 0
+pixel_fontsize = int(h / (len(final_info)*1.3))
+for item in final_info:
+    y = (i+1)* pixel_fontsize
+    x = 3
+    ax.text(x, y, item['stuff']['text'], fontsize=pixel_fontsize) 
+    ax.text(80, y, item['perchase']['text'], fontsize=pixel_fontsize) 
+    #'boxed italics text in data coords', 
+    #style='italic', bbox={'facecolor':'red', 'alpha':0.5, 'pad':10})
+    i += 1
+
+ax.axis([0, 100, (i+1)*pixel_fontsize, 0])
+#plt.show()
+fig.savefig(args.plotroute, bbox_inches='tight')

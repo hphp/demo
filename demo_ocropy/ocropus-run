@@ -1,0 +1,29 @@
+#!/bin/bash -e
+
+src_filename=$1
+output_file=$2
+test_file=$3
+#rm -rf $output_file
+#mkdir -p $output_file
+#cp $src_filename $test_file/
+#cp $src_filename $output_file/0001.ori.png
+#ocropus-sauvola $src_filename -o $output_file
+#ocropus-gpageseg $output_file/????.bin.png --minscale 5
+#ocropus-rpred $output_file/????/??????.bin.png
+##ocropus-hocr $output_file'/????.bin.png' -o $output_file"/0001.html" 
+##ocropus-gtedit html $output_file/????/??????.bin.png -o $output_file'/0001-correction.html'
+#ocropus-showpage $output_file/????.pseg.png -o $output_file'/0001.showseg.png'
+#Gotex_showpage $output_file/????.pseg.png -o $output_file'/0001.cmp.png'
+Gotex-understand $output_file/????.pseg.png -plt $output_file'/0001.pairs.png'
+
+#echo "Origin: " > $output_file'/info.txt'
+#echo "" >> $output_file'/info.txt'
+#echo "Nrm: " >> $output_file'/info.txt'
+#echo "" >> $output_file'/info.txt'
+#echo "Binary: specify ocropus-sauvola" >> $output_file'/info.txt'
+#echo "" >> $output_file'/info.txt'
+#echo "SegToTextLines: specify ocropus-gpageseg\nand limit at 200*200" >> $output_file'/info.txt'
+#echo "" >> $output_file'/info.txt'
+#echo "Regconition: coocropus-rpred. LSTM-RNN" >> $output_file'/info.txt'
+#echo "" >> $output_file'/info.txt'
+#echo "Pairs Result: " >> $output_file'/info.txt'
