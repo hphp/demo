@@ -51,8 +51,31 @@ def ndarr():
 def show_img_in_plot():
     img = cv2.imread("../cp.jpg")
     imshow(img)
-    ginput(1,0.1) # draw the plot
-    raw_input() # waiting for u to hold the plot.
+    # one way
+    #ginput(1,0.1) # draw the plot
+    #raw_input() # waiting for u to hold the plot.
+    # another
+    pylab.show()
+
+def imshow_extent():
+    import matplotlib.pyplot as plt
+    import numpy as np
+
+    grid = np.random.random((10,10))
+
+    fig, (ax1, ax2, ax3) = plt.subplots(nrows=3, figsize=(6,10))
+
+    ax1.imshow(grid, extent=[0,100,0,1])
+    ax1.set_title('Default')
+
+    ax2.imshow(grid, extent=[0,100,0,1], aspect='auto')
+    ax2.set_title('Auto-scaled Aspect')
+
+    ax3.imshow(grid, extent=[0,100,0,1], aspect=100)
+    ax3.set_title('Manually Set Aspect')
+
+    plt.tight_layout()
+    plt.show()
 
 def img_ratio():
     img = cv2.imread("../cp.jpg")
@@ -81,4 +104,5 @@ def write_text_in_figure():
 #write_text_in_figure()
 #ndarr()
 #subplot()
-basic()
+#basic()
+imshow_extent()
