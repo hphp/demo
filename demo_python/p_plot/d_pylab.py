@@ -1,4 +1,5 @@
 
+import pylab
 from pylab import *
 import cv2
 
@@ -49,13 +50,22 @@ def ndarr():
     pl.show()
 
 def show_img_in_plot():
+    figure(frameon=False) 
     img = cv2.imread("../cp.jpg")
     imshow(img)
+    #imshow(img, origin="lower") cant at this moment. , but the origin states the start point of the image.
     # one way
     #ginput(1,0.1) # draw the plot
     #raw_input() # waiting for u to hold the plot.
     # another
-    pylab.show()
+    #pylab.show()
+    # save
+    #pylab.savefig("../fig.png")
+    # save , and without margin
+    pylab.savefig("../fig.png", bbox_inches='tight')
+    #pylab.savefig("../fig.png", bbox_inches='tight', pad_inches=0)
+    #pylab.savefig("../fig.png", bbox_inches='tight', pad_inches=10)
+    #pylab.savefig("../fig.png", bbox_inches='tight', pad_inches=)
 
 def imshow_extent():
     import matplotlib.pyplot as plt
@@ -98,6 +108,7 @@ def write_text_in_figure():
     ax.text(40,50,"helloworld")
     ginput(1,0.1) # draw the plot
     raw_input() # waiting for u to hold the plot.
+
 #show_img_in_plot()
 #write_text_in_plot()
 #img_ratio()
@@ -105,4 +116,4 @@ def write_text_in_figure():
 #ndarr()
 #subplot()
 #basic()
-imshow_extent()
+#imshow_extent()
