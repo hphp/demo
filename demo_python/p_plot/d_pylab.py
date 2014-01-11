@@ -59,13 +59,17 @@ def show_img_in_plot():
     #raw_input() # waiting for u to hold the plot.
     # another
     #pylab.show()
+
+def f_savefig()
+    figure(frameon=False) 
+    img = cv2.imread("../cp.jpg")
+    imshow(img)
     # save
     #pylab.savefig("../fig.png")
     # save , and without margin
     pylab.savefig("../fig.png", bbox_inches='tight')
-    #pylab.savefig("../fig.png", bbox_inches='tight', pad_inches=0)
-    #pylab.savefig("../fig.png", bbox_inches='tight', pad_inches=10)
-    #pylab.savefig("../fig.png", bbox_inches='tight', pad_inches=)
+    #pylab.savefig("../fig.png", bbox_inches='tight', pad_inches=0) could not work
+    #pylab.savefig("../fig.png", bbox_inches='tight', pad_inches=10) could not work and very slow
 
 def imshow_extent():
     import matplotlib.pyplot as plt
@@ -117,3 +121,4 @@ def write_text_in_figure():
 #subplot()
 #basic()
 #imshow_extent()
+#f_savefig()
