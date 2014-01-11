@@ -5,16 +5,26 @@ import cv2
 def basic():
     import pylab as pl
     import numpy as np
+    ###### basic figure show #######
+    pl.figure(1)
+    pl.plot([1,2,3])
+    pl.figure(2)
+    pl.plot([10,2,3])
+    pl.show()
+    ######## plot show numpy #####
     t = np.linspace(0, 10, 20)
     s = sin(t)
     pl.plot(t, s)
     pl.show()
     print 'hello'
     pl.clf()
+
+    ######## plot show subplot #####
     t = np.linspace(0, 10, 20)
     s = (2*t)
-    pl.figure()
+    pl.figure() # return a figure , if nothing exist
     pl.plot(t, s)
+    pl.plot(t, sin(s)) # add a subplot
     pl.show()
 
 def subplot():
