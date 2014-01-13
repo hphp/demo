@@ -1,5 +1,37 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 import string
+import chars
+
+def ischinese(uchar):
+    """判断一个unicode是否是汉字"""
+    if uchar >= u'\u4e00' and uchar<=u'\u9fa5':
+        return True
+    else:
+        return False
+
+def isAscii(uchar):
+    if uchar in chars.ascii:
+        return True
+
+def filter_ch():
+    import d_text
+    text = d_text.read_text("d_file.ch.in", normalize=0)
+    l = ""
+    for line in text:
+        for ch in line:
+            if isAscii(ch):
+                l += ch
+    d_text.write_text("tmp", l, normalize=0)
+    f = open("tmp", "r")
+    wf = open("t", "a")
+    lines = f.readlines()
+    f.close()
+    for line in lines:
+        if line != "\n":
+            wf.write(line) 
+    wf.close()
 
 def f_trans():
     aTob = string.maketrans('e','b')
@@ -60,4 +92,5 @@ def rep():
 #ascii_to_char()
 #space_ascii()
 #ascii_()
-f_trans()
+#f_trans()
+filter_ch()
