@@ -1,4 +1,28 @@
 
+import string
+
+def f_trans():
+    aTob = string.maketrans('e','b')
+    print type(aTob) 
+    s = 'hello world'
+    print s.translate(aTob)
+    print s.translate(aTob, 'o')
+
+def ascii_():
+    print ord('!')
+    print ord('~')
+    print chr(0)
+    print chr(255)
+    print ord(' ')
+
+def space_ascii():
+    a = ' '
+    print "%d" % ord(a)
+    x = (a >= '!' and a <= '~')
+    print x
+    x = (ord(a) >= ord('!') and ord(a) <= ord('~'))
+    print x
+
 def ascii_to_char():
     new_char = "%c"%2
     print new_char
@@ -32,5 +56,8 @@ def rep():
 
 
 #strange()
-rep()
+#rep()
 #ascii_to_char()
+#space_ascii()
+#ascii_()
+f_trans()
