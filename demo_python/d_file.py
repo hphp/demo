@@ -1,5 +1,33 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 import os
+import codecs
+
+def read_chinese():
+    content = "d_file.ch.in"
+    ###### cant read, because each element in line is a ascii ###########
+    #f = open(content,'r+')
+    #for i in range(10):
+    #    line = f.readline()
+    #    if not line:
+    #        break
+    #    eng_line = ""
+    #    for ele in line:
+#   #         print ord(ele)
+    #        if ele >= chr(0) and (ele) <= chr(225):
+    #            eng_line += ele
+    #    print 'thisiseng-'+eng_line, '--------thisisch:', line
+    #f.close()
+    ###### cant read, because each element in line is a ascii ###########
+    ########## codecs read ###############
+    with codecs.open(content, "r", "utf-8") as stream:
+        result = stream.read()
+    
+
+    for i,basic_letter in enumerate(result):
+        print basic_letter
+        if i > 20:
+            break
 
 def rename():
     os.system("touch temp")
@@ -64,4 +92,5 @@ def append():
 #append()
 #check_isfile()
 #read_file()
-rename()
+#rename()
+read_chinese()
