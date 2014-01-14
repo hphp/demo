@@ -26,6 +26,15 @@ def subplot():
     plt.plot([3,5,8])
     plt.show()
 
+def plot_text_center():
+    w, h = 2, 1
+    fontsize = 50
+    fig = plt.figure(figsize=(w, h), dpi = fontsize)
+    sp = plt.subplot(111)
+    sp.text(w/2., h/2., "goodboy", ha='center', va='center', fontsize=fontsize)
+    sp.axis([0,w,0,h])
+    plt.show()
+
 def plot_without_ax():
     fig = plt.figure()
     sp = plt.subplot(111)
@@ -102,4 +111,5 @@ def savefig():
 #plot_text(plenty=120)
 #plot_without_ax()
 #subplot()
-figsize()
+#figsize()
+plot_text_center()
