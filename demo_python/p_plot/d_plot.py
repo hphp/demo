@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 import matplotlib.pyplot as plt
 
+def figsize():
+    w, h, dpi = (9, 12, 10)
+    fig = plt.figure(figsize=(w, h), dpi=dpi)
+    plt.show()
+
 def subplot():
     plt.figure()
     plt.subplot(222)
@@ -95,5 +100,6 @@ def savefig():
 #savefig()
 #basic_plot_text(plenty=120)
 #plot_text(plenty=120)
-plot_without_ax()
+#plot_without_ax()
 #subplot()
+figsize()
