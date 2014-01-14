@@ -1,6 +1,33 @@
 # -*- coding: utf-8 -*-
 import matplotlib.pyplot as plt
 
+def subplot():
+    plt.figure()
+    plt.subplot(222)
+    plt.plot([1,2,3])
+    plt.subplot(224)
+    plt.plot([4,5,6])
+    plt.subplot(221)
+    plt.plot([11,21,31])
+    plt.show()
+
+    plt.figure()
+    plt.subplot(121)
+    plt.plot([3,5,8])
+    plt.show()
+
+    plt.figure()
+    plt.subplot(111)
+    plt.plot([3,5,8])
+    plt.show()
+
+def plot_without_ax():
+    fig = plt.figure()
+    sp = plt.subplot(111)
+    sp.text(0, 0, "goodboy")
+    plt.axis("off")
+    plt.show()
+
 def plot_arr():
     #
     print
@@ -67,4 +94,6 @@ def savefig():
 
 #savefig()
 #basic_plot_text(plenty=120)
-plot_text(plenty=120)
+#plot_text(plenty=120)
+plot_without_ax()
+#subplot()
