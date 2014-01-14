@@ -27,6 +27,7 @@ def f_arange():
     print x
     x = numpy.arange(9).reshape(3,3)
     print x
+    print numpy.arange(400)[:,numpy.newaxis]
 
 def f_where():
     # where( condition ) , return position that satisfy condition
@@ -95,8 +96,8 @@ def basic():
 
 #basic()
 #uniform()
-#f_arange()
+f_arange()
 #f_amax()
 #f_dtype()
 #f_where()
-f_ones()
+#f_ones()
