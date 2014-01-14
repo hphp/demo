@@ -2,6 +2,10 @@
 import numpy
 import random
 
+def mean():
+    l = numpy.arange(10)
+    print numpy.mean(l)
+
 def f_ones():
     l = numpy.ones(2)
     print l # [ 1. 1. ]
@@ -96,8 +100,9 @@ def basic():
 
 #basic()
 #uniform()
-f_arange()
+#f_arange()
 #f_amax()
 #f_dtype()
 #f_where()
 #f_ones()
+mean()
