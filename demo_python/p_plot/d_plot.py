@@ -26,6 +26,23 @@ def subplot():
     plt.plot([3,5,8])
     plt.show()
 
+def plot_text_full(text):
+    if len(text) < 1:
+        return 
+    import re
+    pattern = re.compile(u'\w+')
+    w_list = pattern.findall(text)
+    t_word_n = sum(len(word) for word in w_list)
+    t_sign_n = len(text) - t_word_n 
+    fontsize = 50
+    print t_word_n, t_sign_n, len(text)
+    w, h = (t_word_n*0.5 + t_sign_n*0.2), 1 # cant get the plot text full , because different words occupy different width
+    fig = plt.figure(figsize=(w, h), dpi = fontsize)
+    sp = plt.subplot(111)
+    sp.text(w/2., h/2., text, ha='center', va='center', fontsize=fontsize)
+    sp.axis([0,w,0,h])
+    plt.show()
+
 def plot_text_center():
     w, h = 2, 1
     fontsize = 50
@@ -106,10 +123,19 @@ def savefig():
     fig.savefig("t.png")
     #plt.show()
 
+def plot_text_full_tst():
+    plot_text_full("helloworld")
+    plot_text_full("or")
+    plot_text_full("are you ok")
+    plot_text_full("good to know you hellllllllllllllo")
+    plot_text_full("are you ok                             woooo!!!!!!")
+    plot_text_full("are you ok")
+
 #savefig()
 #basic_plot_text(plenty=120)
 #plot_text(plenty=120)
 #plot_without_ax()
 #subplot()
 #figsize()
-plot_text_center()
+#plot_text_center()
+plot_text_full_tst()
