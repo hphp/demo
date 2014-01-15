@@ -1,5 +1,15 @@
 #!/usr/bin/python
 
+def get_list_size():
+    l = [1,2,3]
+    print len(l)
+    l = [ [1,2,3], [4,5,6] ]
+    su = sum(len(arr) for arr in l)
+    print su
+    l = [ [1,2,3], [4,5,6], [3,4,5,6,7,8,9,0] ]
+    su = sum(len(arr) for arr in l)
+    print su
+
 def dynamic_list():
     l = []
     for i in range(10):
@@ -65,4 +75,5 @@ def del_list():
 #last_ele()
 #range_list()
 #l_clear()
-dynamic_list()
+#dynamic_list()
+get_list_size()
