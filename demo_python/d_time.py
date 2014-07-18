@@ -11,6 +11,7 @@ def sys_time():
     print time.time()
     time.sleep(2)
     print time.time()
+    print int(time.time())
 
 def cpu_time():
     start_time = time.clock()
@@ -21,6 +22,6 @@ def cpu_time():
     print (end_time - start_time) / 60.
     #print " %.2f " % (end_time - start_time) / 60. # not available
     print " %.2f " % ((end_time - start_time) / 60.) # available
-#systime()
+sys_time()
 #cpu_time()
-strptime()
+#strptime()

@@ -1,6 +1,11 @@
 
-l = [1,2,3]
-print type(l)
+def judge_type():
+    if str == type('sdfsfds'):
+        print 'ddd'
 
-print isinstance(l,list)
-print isinstance(l,int)
+def basic():
+    l = [1,2,3]
+    print type(l)
+
+    print isinstance(l,list)
+    print isinstance(l,int)

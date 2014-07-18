@@ -18,3 +18,12 @@ def get_header_test():
     print '---'
     print msg.getparam("ETag") # dontknow what it is
     print '---'
+
+def basic():
+    url=""
+    full_url='http://www.baidu.com'+url
+    data=urllib2.urlopen(full_url)
+    Data=data.read()
+    print Data
+
+basic()

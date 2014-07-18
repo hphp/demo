@@ -74,6 +74,7 @@ def basic():
     print sep.join((a,b,c)) #a.b.c
     print sep.join([a,b,c]) #a.b.c 
     print " ".join([a,b,c])
+    # print " ".join(a,b,c) no valid
 
 def strange():
     ns = "hellomorto-%08d!!"%(3+1)
@@ -86,11 +87,27 @@ def rep():
     nstr = ostr.replace(" ",new_char)
     print ostr, nstr
 
+def str_join():
+    a = "a"
+    b = "b"
+    c = "c"
+    print a+b+c
 
+def str_format():
+    s = "good,{0}".format("morning")
+    print s
+    s = "good,{0}".format("13423432")
+    print s
+    s = "good,{0}".format("342.5")
+    print s
+
+basic()
 #strange()
 #rep()
 #ascii_to_char()
 #space_ascii()
 #ascii_()
 #f_trans()
-filter_ch()
+#filter_ch()
+#str_join()
+#str_format()

@@ -54,7 +54,19 @@ def by_dic_key():
     rand_l = sorted(rand_l, key = lambda ele:ele['z'])
     for ele in rand_l:
         print ele
+def sort_by_dict_order():
+    arr = [ \
+    "sdfdsfdsfs" \
+    ,"abddfdsfds"\
+    ,"sdfsdfs" \
+    ,"dsfdsfs" \
+    ,"dfdsfsfsfs" \
+    ,"sdfds" \
+    ]
+    arr.sort()
+    print arr
 #basic()
 #dim_2()
 #by_class_key()
-by_dic_key()
+#by_dic_key()
+sort_by_dict_order()
