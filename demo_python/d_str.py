@@ -103,6 +103,10 @@ def str_format():
     #s = "{'good':{0}}".format("342.5") # cant work
     #print s
 
+def str_pos():
+    s = "gooood"
+    print s[0:-1]
+
 #basic()
 #strange()
 #rep()
@@ -112,4 +116,5 @@ def str_format():
 #f_trans()
 #filter_ch()
 #str_join()
-str_format()
+#str_format()
+str_pos()
