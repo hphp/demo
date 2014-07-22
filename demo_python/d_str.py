@@ -100,8 +100,10 @@ def str_format():
     print s
     s = "good,{0}".format("342.5")
     print s
+    #s = "{'good':{0}}".format("342.5") # cant work
+    #print s
 
-basic()
+#basic()
 #strange()
 #rep()
 #ascii_to_char()
@@ -110,4 +112,4 @@ basic()
 #f_trans()
 #filter_ch()
 #str_join()
-#str_format()
+str_format()

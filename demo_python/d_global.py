@@ -13,13 +13,19 @@ def test_class():
 
 def test_a():
     global a, b
-    print a, b
     #global a, b
     print a, b
     a += 4
     b = 4
 
-test_class()
-print c.m
+def test_session():
+    a = 4
+    b = 4
+    print a, b
+
+#test_class()
+#print c.m
 #test_a()
-#print a, b
+print a, b
+test_session()
+print a, b
