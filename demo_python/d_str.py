@@ -107,6 +107,13 @@ def str_pos():
     s = "gooood"
     print s[0:-1]
 
+def str_equal():
+#    print "sdfs".equals("sdfs") # no equals function
+    print "sdfs" == "sdfs"
+    print "sdfs" == "sdfs" and True
+    print "sdfs" == "sdfs" and not True
+    print "sdfs" == "sdfs" and False
+
 #basic()
 #strange()
 #rep()
@@ -117,4 +124,5 @@ def str_pos():
 #filter_ch()
 #str_join()
 #str_format()
-str_pos()
+#str_pos()
+str_equal()
