@@ -68,9 +68,9 @@ def read_from_file():
     print load
     filehandle.close()
 #basic()
-#json_dumps() # from obj to str
+json_dumps() # from obj to str
 #json_loads() # from str to obj
 #get_key_value()
 #read_from_file()
 #iterate_json_obj() # iterate json object using keys.
-iterate_json_obj_several_jsobj()
+#iterate_json_obj_several_jsobj()
