@@ -12,12 +12,16 @@ def d_urlencode():
 
 def unicode_basic():
     strr = u'你好，大世界'
+    print type(strr)
+    utf8_str = str.encode('utf-8')
+    print utf8_str, type(utf8_str)
     print unicode('aaa')
     print type(unicode('aaa'))
     print unicode(strr)
     print type(unicode(strr))
     unicode_str = unicode(strr)
     print unicode_str.encode('utf-8'), type(unicode_str.encode('utf-8'))
+#    print str(unicode_str)
     #print unicode('你好 小童通')
 
 def d_zhongwen_encoding():
