@@ -17,4 +17,8 @@ def range_step():
     for i in arange(1., 2, 0.5):
         print i
 
-range_step()
+def range_from_not_0():
+    for i in range(2, 10, 5):
+        print i
+#range_step()
+range_from_not_0()
