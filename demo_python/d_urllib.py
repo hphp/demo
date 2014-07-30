@@ -26,4 +26,13 @@ def basic():
     Data=data.read()
     print Data
 
-basic()
+def url_decode():
+    fh = open('d_urllib.url_decode.in','r')
+    jsondata = fh.readline()
+    fh.close()
+    decoded_data = urllib2.unquote(jsondata)
+    print decoded_data
+
+#get_header_test()
+#basic()
+url_decode()
