@@ -53,6 +53,14 @@ def json_loads():
     json_obj = json.loads(json_str) 
     print json_obj, type(json_obj)
 
+# load filehandle formatted str to obj
+def json_loads():
+    #json_str = "{'a':'b','1':2}" # cant work
+    json_str = '{"a": "b", "1": 2}' # fit format
+    print json_str # str
+    json_obj = json.loads(json_str) 
+    print json_obj, type(json_obj)
+
 def get_key_value():
     json_obj = {'a':2, '1':'3', '2': 4}
     for key in json_obj.keys():
