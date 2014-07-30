@@ -3,7 +3,8 @@ def basic():
     dic = {}
     dic[1] = 20
     dic['2'] = 30
-    print dic
+#    print dic
+    return dic
 
 def iter():
     dic = {}
@@ -22,5 +23,15 @@ def subdict():
     dic = {'x':1, 'y':2, 'z':3}
     print dic['x']
 
+def array_dict():
+    lst = []
+    lst += [basic()]
+    lst += [basic()]
+    lst += [basic()]
+    #lst[0:2]['2'] # not valid
+    print lst
+
 #iter()
-subdict()
+#subdict()
+
+array_dict()
