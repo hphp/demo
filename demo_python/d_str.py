@@ -87,6 +87,14 @@ def rep():
     nstr = ostr.replace(" ",new_char)
     print ostr, nstr
 
+def lst_join():
+    a = "a"
+    b = "b"
+    c = "c"
+    lst = [a, b, c]
+    lst = '.'.join(lst)
+    print lst
+
 def str_join():
     a = "a"
     b = "b"
@@ -123,6 +131,7 @@ def str_equal():
 #f_trans()
 #filter_ch()
 #str_join()
+lst_join()
 #str_format()
 #str_pos()
-str_equal()
+#str_equal()
