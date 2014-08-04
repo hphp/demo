@@ -11,11 +11,14 @@ def is_prefix():
         print b, 'start with', a
     al = ['你', u'你'] # '你'.encode('utf-8')]
     b = '你好'
+    c = 'helloworld'
     for a in al:
         if isinstance(a, unicode):
             a = a.encode('utf-8')
         if b.startswith(a):
             print b, 'start with', a
+        if c.startswith(a):
+            print c, 'start with', a
 
 def ischinese(uchar):
     """判断一个unicode是否是汉字"""
