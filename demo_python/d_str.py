@@ -4,6 +4,19 @@
 import string
 import chars
 
+def is_prefix():
+    a = 'a'
+    b = 'abccde'
+    if b.startswith(a):
+        print b, 'start with', a
+    al = ['你', u'你'] # '你'.encode('utf-8')]
+    b = '你好'
+    for a in al:
+        if isinstance(a, unicode):
+            a = a.encode('utf-8')
+        if b.startswith(a):
+            print b, 'start with', a
+
 def ischinese(uchar):
     """判断一个unicode是否是汉字"""
     if uchar >= u'\u4e00' and uchar<=u'\u9fa5':
@@ -131,7 +144,8 @@ def str_equal():
 #f_trans()
 #filter_ch()
 #str_join()
-lst_join()
+#lst_join()
 #str_format()
 #str_pos()
 #str_equal()
+is_prefix()
