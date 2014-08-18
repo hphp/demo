@@ -7,8 +7,11 @@ def for_excel_2007():
     # cant manipulate xls anymore.
     #sheet_names = wb.get_sheet_names()
     ws = wb.get_sheet_by_name("Sheet1")
-    print ws.cell('A1').value
+    #print ws.cell('A1').value
     # will just print the normal chinese instead of messy codes in spite of whether encoding:utf8 is set.
+
+    for cell in ws.range("A2:A9"):
+        print cell[0].value
 
 def for_excel_2003():
     import xlrd
