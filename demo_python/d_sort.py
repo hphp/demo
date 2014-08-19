@@ -29,7 +29,7 @@ def by_class_key():
         rand_l += [ele]
 
     print rand_l
-    from operator import itemgetter, attrgetter
+    #from operator import itemgetter, attrgetter
     rand_l = sorted(rand_l, key = lambda ele:ele.key) #itemgetter(0)) # ??????
     for ele in rand_l:
         print ele.key, ele.value
@@ -68,5 +68,5 @@ def sort_by_dict_order():
 #basic()
 #dim_2()
 #by_class_key()
-#by_dic_key()
-sort_by_dict_order()
+by_dic_key()
+#sort_by_dict_order()

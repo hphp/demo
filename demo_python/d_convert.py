@@ -2,7 +2,8 @@
 
 def int_to_ascii():
     i = 1
-    print unichr(i+ord('a'))
+    unichar = unichr(i+ord('a'))
+    print unichar, type(unichar), type(str(unichar))
 
 def int_to_str():
     i = 1
