@@ -1,0 +1,6 @@
+target (main) { 
+	SOURCES = main.cpp 
+}
+test (test_main){
+	SOURCES = test.cpp
+}
