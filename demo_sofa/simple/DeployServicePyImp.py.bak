@@ -1,0 +1,209 @@
+import sys
+import sofa
+import os
+import inspect
+import json
+
+pathToAddToSys = \
+[
+    "./",
+]
+
+for path in pathToAddToSys :
+    cmd_subfolder = os.path.realpath(os.path.abspath(os.path.join(os.path.split(inspect.getfile( inspect.currentframe() ))[0], path)))
+    if cmd_subfolder not in sys.path:
+         sys.path.insert(0, cmd_subfolder)
+
+from CommonDeployManager         import *
+from DeployOneModuleManager      import *
+from PublicData                  import *
+from DeployConfig                import *
+
+#-----------------------------------------------------------------------------
+
+class DeployServicePyImp:
+    MODULE='pyimp.OnlineDeployService.ver_1_0_0'
+    IMPLEMENTS=['OnlineDeployService.ver_1_0_0.OpenPlatDeployService']
+
+    def __init__(self, conf):
+        sofa.use('OnlineDeployService.ver_1_0_0')
+        
+        #
+        # get conf path & init
+        #
+        confPath = conf.get("config.conf_path")
+        sys.stderr.write("get init conf path is :{0}\n".format(confPath))
+        self._deployConfig = DeployConfig(confPath)
+
+    #-----------------------------------------------------------------------------
+
+    def DecodeOneBsAsEnv(self, oneBsAsEnvJson) :
+        bsEnvList = []
+        asEnvList = []
+        for i in oneBsAsEnvJson['bs'] :
+            bsEnvList.append(DeployEnv(i['ip'], i['user'], i['path']))
+        asEnvList.append(DeployEnv(oneBsAsEnvJson['as']['ip'], oneBsAsEnvJson['as']['user'], oneBsAsEnvJson['as']['path']))
+
+        return (asEnvList, bsEnvList)
+
+    #-----------------------------------------------------------------------------
+
+    def DecodeOneEnvList(self, envJson, envName) :
+        if envName not in envJson :
+            return (False, None)
+
+        envList = []
+        for i in envJson[envName] :
+            envList.append(DeployEnv(i['ip'], i['user'], i['path']))
+
+        return (True, envList)
+            
+
+    #-----------------------------------------------------------------------------
+
+    def DeployOneModule(self, prodID, prodName, localEnvPath, strategy, module, envlist, args='') :
+    
+        deployOneModuleManager = \
+            DeployOneModuleManager( \
+                prodID, prodName, localEnvPath,
+                strategy, module, envlist, args)
+                
+        try :
+            deployOneModuleManager.Run(self._deployConfig._maxRetryTime)
+        except Exception, e:
+            errMsg = 'Deploy {1} failed. Detail info: \"{0}\"'.format(e, module)
+            sys.stderr.write(errMsg+'\n')
+            return (False, errMsg)
+
+        bsDeployResult = deployOneModuleManager.GetDeployResult()
+
+        return (True, bsDeployResult)
+
+    #-----------------------------------------------------------------------------
+
+    def DeployOneBsAsEnv(self, oneBsAsEnvJson, prodID, prodName, strategy, featRetMsg) :
+    
+        (asEnvList,bsEnvList) = DecodeOneBsAsEnv(oneBsAsEnvJson)
+
+        #
+        # bs
+        #
+        (retStatus, bsRetMsg) = self.DeployOneModule(prodID, prodName, strategy, 'bs', bsEnvList)
+        if retStatus == False :
+            return (GlobalErrorNo.BS_DEPLOY_FAILED, bsRetMsg)
+            
+        #
+        # as
+        #
+        asArgs = bsRetMsg + ' ' + featRetMsg
+        (retStatus, asRetMsg) = self.DeployOneModule(prodID, prodName, strategy, 'as', asEnvList, asArgs)
+        if retStatus == False :
+            return (GlobalErrorNo.AS_DEPLOY_FAILED, asRetMsg)
+        
+
+        return (GlobalErrorNo.SUCCESS, asRetMsg)
+        
+
+    #-----------------------------------------------------------------------------
+
+    def FormRetJson(self, errno, errmsg, ret='') :
+        jsonObj = json.dumps({ \
+                      'errno' : errno,
+                      'errmsg' : errmsg,
+                      'ret' : ret
+                      }, sort_keys = False)
+        return str(jsonObj)
+
+    #-----------------------------------------------------------------------------
+
+    def CheckInputInvlid(self, envJson) :
+        columnNum     = int(envJson["ColumnNum"])
+        bsNumPerCol   = int(envJson["BSNumPerCol"])
+        acNum         = int(envJson["acNum"])
+        featureNum    = int(envJson["featureNum"])
+
+        #
+        # check bs
+        #
+        if len(envJson['ColumnsMatrix']) != columnNum :
+            errMsg = 'len(envJson[\'ColumnsMatrix\'])={0} does not match columnNum={1}'.format( \
+                         len(envJson['ColumnsMatrix']), columnNum)
+            sys.stderr.write(errMsg+'\n')
+            return (False, errMsg)
+            
+        for oneBsAsEnv in envJson['ColumnsMatrix'] :
+            if len(oneBsAsEnv['bs']) != bsNumPerCol :
+                errMsg = 'len(oneBsAsEnv[\'bs\'])={0} does not match bsNumPerCol={1}'.format( \
+                             len(oneBsAsEnv['bs']), bsNumPerCol)
+                sys.stderr.write(errMsg + '\n')
+                return (False, errMsg)
+
+        #
+        # check feat
+        #
+        if len(envJson['feature']) != featureNum :
+            errMsg = 'len(envJson[\'feature\'])={0} does not match featureNum={1}'.format( \
+                         len(envJson['feature']), featureNum)
+            sys.stderr.write(errMsg+'\n')
+            return (False, errMsg)
+
+        #
+        # check ac
+        #
+        if len(envJson['ac']) != acNum :
+            errMsg = 'len(envJson[\'ac\'])={0} does not match acNum={1}'.format( \
+                         len(envJson['ac']), acNum)
+            sys.stderr.write(errMsg+'\n')
+            return (False, errMsg)
+
+        return (True, '')
+        
+
+    #-----------------------------------------------------------------------------
+
+    def Deploy(self, info):
+        sys.stderr.write('Get Request Info: prodID-{0} prodName-{1} strategy-{2} environment-{3}\n'.format( \
+            info.prodID, info.prodName, info.strategy, info.environment))
+
+        #
+        # check invalid
+        #
+        envJson = json.loads(info.jsonMachineInfo)
+        (ret, errMsg) = self.CheckInputInvlid(envJson)
+        if ret == False:
+            return self.FormRetJson(GlobalErrorNo.INVALID_PARAM, errMsg)
+
+        #
+        # deploy feature
+        #
+        (ret, feaEnvList) = self.DecodeOneEnvList(envJson, 'feature')
+        if ret == False :
+            return self.FormRetJson(GlobalErrorNo.INVALID_PARAM, 'Get Feature Env failed.')
+        
+        (ret, retMsg) = self.DeployOneModule(prodID, prodName, strategy, 'feature', feaEnvList)
+        if ret == False :
+            return self.FormRetJson(GlobalErrorNo.FEAT_DEPLOY_FAILED, retMsg)
+
+        #
+        # deploy bs & as
+        #
+        deployAsRet = []
+        for oneBsAsEnv in envJson['ColumnsMatrix'] :
+            (errno, retMsg) = self.DeployOneBsAsEnv(oneBsAsEnv, info.prodID, info.prodName, info.strategy, retMsg)
+            if errno != GlobalErrorNo.SUCCESS :
+                return self.FormRetJson(errno, retMsg)
+            deployAsRet.append(retMsg)
+
+        #
+        # deploy ac
+        #
+        (ret, acEnvList) = self.DecodeOneEnvList(envJson, 'ac')
+        if ret == False :
+            return self.FormRetJson(GlobalErrorNo.INVALID_PARAM, 'Get ac Env failed.')
+        (ret, retMsg) = self.DeployOneModule(prodID, prodName, strategy, 'ac', acEnvList)
+        if ret == False :
+            return self.FormRetJson(GlobalErrorNo.AC_DEPLOY_FAILED, retMsg)
+        
+        
+        return retMsg
+

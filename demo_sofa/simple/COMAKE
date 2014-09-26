@@ -1,0 +1,53 @@
+#edit-mode: -*- python -*-
+#coding:gbk
+
+WORKROOT('../../../../')
+
+SOFA_HOME='../../../../public/sofa/'
+SOFA=SOFA_HOME+'bin/sofa'
+SOFA_PYTHON_LOADER=SOFA_HOME+'lib/python/2.7/sofa.interop.python27.tar.gz'
+
+# commit idl interface
+TARGET('.commit_interface',
+        Depends(SOFA,'idl/OnlineDeployService.idl'),
+        ShellCommands(
+            'rm -rf sidb',
+            SOFA + ' compile -f -o ./idl/assembly.tar.gz ./idl/OnlineDeployService.idl',
+            SOFA + ' commit -f ./idl/assembly.tar.gz',
+            'tar xfz ./idl/assembly.tar.gz -C ./idl assembly.so',
+            'touch .commit_interface'),
+        CleanFiles('sidb idl/assembly.tar.gz idl/assembly.so .commit_interface'))
+
+# commit python loader
+TARGET('.commit_python_loader',
+        Depends(SOFA,SOFA_PYTHON_LOADER,'.commit_interface'),
+        ShellCommands(
+            SOFA + ' commit -f ' + SOFA_PYTHON_LOADER,
+            'touch .commit_python_loader'),
+        CleanFiles('.commit_python_loader'))
+
+# commit implement
+TARGET('.commit_implement',
+        Depends(SOFA,'.commit_interface',
+            '.commit_python_loader','assembly.xml','DeployServicePyImp.py','__init__.py'),
+#            'DeployConfig.py', 'PublicData.py'),
+        ShellCommands(
+            'tar cfz implement.tar.gz assembly.xml DeployServicePyImp.py __init__.py',
+            SOFA + ' commit -f ./implement.tar.gz',
+            'touch .commit_implement'),
+        CleanFiles('implement.tar.gz .commit_implement'))
+
+#'tar cfz implement.tar.gz assembly.xml DeployServicePyImp.py __init__.py DeployConfig.py PublicData.py',
+
+#
+# makeup output
+#
+TARGET('.generate_output',
+        Depends('.commit_python_loader'),
+        ShellCommands(
+            'rm -rf output',
+            'mkdir output',
+            'cp ' + SOFA_HOME + 'bin/svchost output',
+            'cp -r sidb output',
+            'cp sofa_config.xml output'),
+        CleanFiles('output .generate_output'))

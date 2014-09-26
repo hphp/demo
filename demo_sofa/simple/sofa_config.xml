@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sofa>
+    <runtime>
+        <sidb>embedded://./sidb</sidb>
+        <dlclose_on_unload>true</dlclose_on_unload>
+        <default_thread_num>4</default_thread_num>
+        <rpc>
+            <server>
+                <default_port>12344</default_port>
+                <work_thread_num>8</work_thread_num>
+                <max_pending_buffer_size>5</max_pending_buffer_size>
+                <max_throughput_in>30</max_throughput_in>
+                <max_throughput_out>30</max_throughput_out>
+            </server>
+            <client>
+                <default_timeout>60000</default_timeout>
+                <work_thread_num>4</work_thread_num>
+                <max_pending_buffer_size>5</max_pending_buffer_size>
+                <max_throughput_in>30</max_throughput_in>
+                <max_throughput_out>30</max_throughput_out>
+            </client>
+        </rpc>
+        <log imp="default">
+            <level>ERROR</level>
+        </log>
+        <init_service imp="pyimp.OnlineDeployService.ver_1_0_0.DeployServicePyImp">
+            <key>OnlineDeployService</key>
+            <port>12344</port>
+            <stub>1</stub>
+            <stub_name>OnlineDeployService</stub_name>
+            <config>
+                <conf_path>./conf/deploy.conf</conf_path>
+            </config>
+        </init_service>
+    </runtime>
+</sofa>
+
+<simple imp="default">
+</simple>
+<simple imp="pyimp.OnlineDeployService.ver_1_0_0.DeployServicePyImp">
+</simple>
+<simple imp="net_proxy">
+    <peer_addr>127.0.0.1:12344:1</peer_addr>
+    <default_timeout>3000</default_timeout>
+    <compress_type>LZ4</compress_type>
+    <enable_invoke_info>true</enable_invoke_info>
+    <cookie>
+        <merge_strategy>proxy_first</merge_strategy>
+        <item>
+            <key>test_key</key>
+            <value>value_set_in_proxy_config</value>
+        </item>
+    </cookie>
+</simple>
+

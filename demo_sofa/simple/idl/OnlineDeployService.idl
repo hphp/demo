@@ -1,0 +1,23 @@
+module OnlineDeployService.ver_1_0_0;
+description "This is an idl for OnlineDeployService";
+
+struct DeployRequestInfo
+{
+    // prod info
+    // prod_id <=> dbid
+    // strategy: same/similar/face
+    string prodID;
+    string prodName;
+    string strategy;
+
+    // env: 'test' or 'prod'
+    string environment;
+
+    // 具体格式见设计文档
+    string jsonMachineInfo;
+};
+
+service OpenPlatDeployService
+{
+    string Deploy(DeployRequestInfo reqInfo);
+};
