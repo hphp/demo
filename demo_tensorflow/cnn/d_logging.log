@@ -1,0 +1,5 @@
+2016-08-21 14:53:24,210 - demo_logger - INFO - foorbar
+2016-08-21 14:53:24,210 - demo_logger - INFO - ('foorbar', 'good')
+2016-08-21 14:53:24,210 - demo_logger - INFO - main
+2016-08-21 14:53:47,037 - demo_logger - INFO - main
+2016-08-21 14:53:47,037 - demo_logger - DEBUG - main
