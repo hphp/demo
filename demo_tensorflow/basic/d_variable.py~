@@ -1,0 +1,39 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+########################################################################
+# 
+# Copyright (c) 2016 Baidu.com, Inc. All Rights Reserved
+# 
+########################################################################
+ 
+"""
+File: basic/d_variable.py
+Author: hanjiatong(hanjiatong@baidu.com)
+Date: 2016/09/19 15:00:42
+"""
+import tensorflow as tf
+# Create a Variable, that will be initialized to the scalar value 0.
+state = tf.Variable(0, name="counter")
+
+# Create an Op to add one to `state`.
+
+one = tf.constant(1)
+new_value = tf.add(state, one)
+update = tf.assign(state, new_value)
+
+# Variables must be initialized by running an `init` Op after having
+# launched the graph.  We first have to add the `init` Op to the graph.
+init_op = tf.initialize_all_variables()
+
+# Launch the graph and run the ops.
+with tf.Session() as sess:
+  # Run the 'init' op
+  sess.run(init_op)
+  # Print the initial value of 'state'
+  print(sess.run(state))
+  print(sess.run(state))
+  print(sess.run(state))
+  # Run the op that updates 'state' and print 'state'.
+  for _ in range(3):
+    sess.run(update)
+    print(sess.run(state))
